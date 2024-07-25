@@ -16,38 +16,24 @@ $message = trim($_POST['contact-message']);
 
 $msg = [];
 
-if ($name == "") {
-    $msg['err'] = "Name cannot be empty!";
-    $msg['field'] = "contact-name";
-    $msg['code'] = FALSE;
-} else if ($phone == "") {
-    $msg['err'] = "Phone number cannot be empty!";
-    $msg['field'] = "contact-phone";
-    $msg['code'] = FALSE;
-} else if (!preg_match("/^[0-9 \\-\\+]{4,17}$/i", $phone)) {
-    $msg['err'] = "Please enter a valid phone number!";
-    $msg['field'] = "contact-phone";
-    $msg['code'] = FALSE;
-} else if ($email == "") {
-    $msg['err'] = "Email cannot be empty!";
-    $msg['field'] = "contact-email";
-    $msg['code'] = FALSE;
-} else if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
-    $msg['err'] = "Please enter a valid email address!";
-    $msg['field'] = "contact-email";
-    $msg['code'] = FALSE;
-} else if ($subject == "") {
-    $msg['err'] = "Subject cannot be empty!";
-    $msg['field'] = "subject";
-    $msg['code'] = FALSE;
-} else if ($message == "") {
+// Check if the message is empty
+if ($message == "") {
     $msg['err'] = "Message cannot be empty!";
     $msg['field'] = "contact-message";
     $msg['code'] = FALSE;
 } else {
+    // Set default values if name or email is not provided
+    if ($name == "") {
+        $name = "Anonymous";
+    }
+
+    if ($email == "") {
+        $email = "anonymous@example.com";
+    }
+
     // Email details
     $to = 'emmanuel.k.makau.jr.26@dartmouth.edu';
-    $email_subject = 'inbio Contact Query: ' . $subject;
+    $email_subject = 'inbio Contact Query: ' . ($subject != "" ? $subject : "No Subject");
 
     // Email content
     $_message = '<html><head></head><body>';
