@@ -78,7 +78,7 @@
                             $('.form-group').removeClass('focused');
                             _self.find('.rn-btn').after('<div class="success-msg"><p>' + data.success + '</p></div>');
                             _self.find('input, textarea').val('');
-    
+        
                             setTimeout(function() {
                                 $('.success-msg').fadeOut('slow');
                             }, 5000);
@@ -87,12 +87,13 @@
                     error: function(jqXHR, textStatus, errorThrown) {
                         console.log('AJAX error: ' + textStatus + ' : ' + errorThrown);
                         _self.find('button[type="submit"]').removeAttr('disabled');
-                        _self.find('.rn-btn').after('<div class="error-msg"><p>There was an error sending the message. Please try again later.</p></div>');
+                        console.log('There was an error sending the message. Please try again later.');
                     }
                 });
             });
         });            
     },
+    
     
 
     wowActive: function () {
